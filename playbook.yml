@@ -1,0 +1,32 @@
+- name: Create a Builder instance
+  hosts: localhost
+  vars:
+    ip_build: 127.0.0.1
+    group_builds: ""
+    buck: s3://hw13bucket.hw.com
+
+  roles:
+    - role: ec2_build
+
+- name: Create a Webserver instance
+  hosts: localhost
+  vars:
+    ip_web: 127.0.0.1
+    group_web: ""
+  
+  roles:
+    - role: ec2_web
+
+- name: Build Application
+  hosts: "{{ group_builds }}"
+  become: true
+
+  roles:
+    - role: build_app
+
+- name: Run Application
+  hosts: "{{ group_web }}"
+  become: true
+
+  roles:
+    - role: run_app

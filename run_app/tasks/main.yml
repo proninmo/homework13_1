@@ -1,0 +1,14 @@
+---
+# tasks file for run_app
+- name: Install packages
+  apt:
+    name: ['default-jre', 'tomcat9']
+    state: present
+    update_cache: true
+
+- name: Get arteafct from s3
+  amazon.aws.aws_s3:
+    bucket: {{ buck }}
+    object: /tmp/*.war
+    dest: /var/lib/tomcat9/webapps
+    mode: get

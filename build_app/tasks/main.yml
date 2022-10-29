@@ -1,0 +1,27 @@
+---
+# tasks file for build_app
+- name: Install packages
+  apt:
+    name: ['default-jre', 'maven', 'git']
+    state: present
+    update_cache: true
+
+- name: Clone a github repository 
+  git:
+    repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+    dest: /tmp
+    clone: true
+    update: true
+
+- name: Building artefact
+  shell:
+    chdir: /tmp/boxfuse-sample-java-war-hello
+    cmd: mvn package
+
+- name: Copy artefact to bucket
+  amazon.aws.aws_s3:
+    bucket: "{{ buck }}"
+    object: /tmp/*.war
+    src: /tmp/boxfuse-sample-java-war-hello/target/*.war
+    mode: put
+
