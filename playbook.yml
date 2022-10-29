@@ -3,7 +3,7 @@
   vars:
     ip_build: 127.0.0.1
     group_builds: ""
-    buck: s3://homework13bucket.com
+    buck: homework13bucket.com
 
   roles:
     - role: ec2_build
