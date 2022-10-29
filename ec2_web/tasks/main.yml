@@ -41,7 +41,7 @@
   
 - name: print
   debug:
-    ip_web: output.instances[0].public_ip
+    var: output.instances[0].public_ip
 
 - name: update inventory
   add_host:
