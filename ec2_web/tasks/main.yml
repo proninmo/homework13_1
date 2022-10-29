@@ -46,4 +46,4 @@
 - name: update inventory
   add_host:
     name: "{{ output.instances[0].public_ip }}"
-    groups: group_web
+    groups: "{{ group_web }}"
