@@ -8,7 +8,7 @@
 
 - name: Get arteafct from s3
   amazon.aws.aws_s3:
-    bucket: {{ buck }}
+    bucket: "{{ buck }}"
     object: /tmp/*.war
     dest: /var/lib/tomcat9/webapps
     mode: get
