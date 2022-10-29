@@ -38,11 +38,11 @@
   
 - name: print
   debug:
-    ip_build: output.instances[0].public_ip
+    var: output.instances[0].public_ip
 
 - name: update inventory
   add_host:
-    name: "{{ ip_build }}"
+    name: "{{ output.instances[0].public_ip }}"
     groups: "{{ group_builds }}"
 
 - amazon.aws.s3_bucket:
